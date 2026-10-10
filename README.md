@@ -9,3 +9,9 @@
 - Comparação de jornadas (e-commerce × Radar): [docs/JORNADAS.md](docs/JORNADAS.md)
 - Estrutura de repositórios, branching e governança: [docs/ESTRUTURA_REPOSITORIOS.md](docs/ESTRUTURA_REPOSITORIOS.md)
 - Backlog inicial por domínio: [docs/BACKLOG_INICIAL.md](docs/BACKLOG_INICIAL.md)
+
+## Propriedade
+
+- Propriedade: **Sigma SIHF Soluções Analíticas LTDA**
+- CNPJ: **31.088.291/0001-09**
+- Criado por: **Charles de Paula Eugenio**

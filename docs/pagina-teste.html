@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radar | Página de Testes</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem;
+      }
+
+      main {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+
+      form {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      input,
+      textarea,
+      select,
+      button {
+        font: inherit;
+        padding: 0.6rem;
+      }
+
+      pre {
+        border: 1px solid #777;
+        border-radius: 8px;
+        padding: 0.8rem;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Página de Testes</h1>
+      <p>Use este formulário para validar interações básicas no navegador.</p>
+
+      <form id="form-teste">
+        <label>
+          Nome
+          <input id="nome" type="text" placeholder="Digite seu nome" required />
+        </label>
+
+        <label>
+          Ambiente
+          <select id="ambiente">
+            <option value="Comprador">Comprador</option>
+            <option value="Vendedor">Vendedor</option>
+          </select>
+        </label>
+
+        <label>
+          Mensagem
+          <textarea id="mensagem" rows="4" placeholder="Escreva algo para teste"></textarea>
+        </label>
+
+        <div>
+          <button id="preencher-exemplo" type="button">Preencher exemplo</button>
+          <button type="submit">Enviar teste</button>
+        </div>
+      </form>
+
+      <h2>Resultado</h2>
+      <pre id="resultado">Nenhum envio ainda.</pre>
+    </main>
+
+    <script>
+      const form = document.getElementById("form-teste");
+      const resultado = document.getElementById("resultado");
+
+      document.getElementById("preencher-exemplo").addEventListener("click", () => {
+        document.getElementById("nome").value = "Teste Radar";
+        document.getElementById("ambiente").value = "Comprador";
+        document.getElementById("mensagem").value = "Mensagem de exemplo para validação manual.";
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value.trim();
+        const ambiente = document.getElementById("ambiente").value;
+        const mensagem = document.getElementById("mensagem").value.trim();
+
+        resultado.textContent = `Nome: ${nome}\nAmbiente: ${ambiente}\nMensagem: ${
+          mensagem || "(vazia)"
+        }`;
+      });
+    </script>
+  </body>
+</html>

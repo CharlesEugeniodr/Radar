@@ -7,3 +7,4 @@
 
 - Arquitetura de produto: [docs/ARQUITETURA.md](docs/ARQUITETURA.md)
 - Comparação de jornadas (e-commerce × Radar): [docs/JORNADAS.md](docs/JORNADAS.md)
+- Página de testes: [docs/pagina-teste.html](docs/pagina-teste.html)

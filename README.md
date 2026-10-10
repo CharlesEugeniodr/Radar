@@ -1,4 +1,9 @@
 # Radar
-1. *Ambiente do comprador:* publicar uma intenção de compra e receber propostas. 2. *Ambiente do vendedor:* encontrar demandas qualificadas e enviar propostas comerciais.
 
-Veja a arquitetura de produto em [docs/ARQUITETURA.md](docs/ARQUITETURA.md).
+*Um lugar onde você define o que quer e quanto quer pagar.*
+
+1. **Ambiente do comprador:** publicar uma intenção de compra e receber propostas.
+2. **Ambiente do vendedor:** encontrar demandas qualificadas e enviar propostas comerciais.
+
+- Arquitetura de produto: [docs/ARQUITETURA.md](docs/ARQUITETURA.md)
+- Comparação de jornadas (e-commerce × Radar): [docs/JORNADAS.md](docs/JORNADAS.md)

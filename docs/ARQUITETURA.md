@@ -151,6 +151,118 @@ demandas recorrentes.
   recomendado no MVP) vs. *marketplace completo* (pagamento, garantia, cancelamento, disputa,
   entrega, nota fiscal).
 
+## 9. LGPD by design
+
+### Princípios obrigatórios
+
+- **Finalidade e necessidade:** coletar apenas o necessário para publicar, casar e fechar uma demanda.
+- **Minimização:** identidade e contato direto do comprador só após aceite e consentimento.
+- **Transparência:** explicar claramente o uso dos dados em cada etapa do fluxo.
+- **Segurança e prevenção:** criptografia, trilhas de auditoria e controle de acesso por perfil.
+
+### Base legal e ciclo de dados
+
+| Etapa | Dados principais | Base legal | Retenção sugerida |
+|---|---|---|---|
+| Cadastro e autenticação | nome, e-mail, telefone, documentos de conta | execução de contrato | enquanto conta ativa + prazo legal |
+| Publicação da intenção | necessidade, orçamento, prazo, localização aproximada | execução de contrato | histórico operacional |
+| Match e propostas | categoria, região aproximada, score, proposta comercial | legítimo interesse + execução de contrato | histórico operacional |
+| Fechamento | dados de entrega/pagamento/fiscal (quando aplicável) | execução de contrato + obrigação legal | conforme obrigação fiscal/contábil |
+| Marketing opcional | preferências de comunicação | consentimento | até revogação |
+
+### Direitos do titular (fluxo produto)
+
+- acesso e portabilidade de dados;
+- correção cadastral;
+- revogação de consentimento;
+- anonimização/exclusão quando possível juridicamente;
+- registro de requisição com protocolo e prazo de atendimento.
+
+### Controles operacionais mínimos
+
+- consentimento versionado (`quem`, `quando`, `qual termo`);
+- trilha de auditoria de acesso a PII;
+- política de descarte/anonimização por tipo de dado;
+- canal de privacidade para requisições LGPD.
+
+## 10. Lógica de busca por área, região e proximidade
+
+### Entradas do matching geográfico
+
+- `intencao.localizacao_aproximada` (geoponto aproximado);
+- `intencao.raio_km` (alcance desejado);
+- `vendedor.area_atendimento` (cidades/bairros/UF ou polígonos);
+- `vendedor.raio_max_entrega` e disponibilidade declarada.
+
+### Etapas de busca
+
+1. **Filtro por área macro:** UF/cidade/região atendida pelo vendedor.
+2. **Filtro por região local:** bairro/zona/polígono de entrega compatível.
+3. **Proximidade:** cálculo de distância entre demanda e origem operacional do vendedor.
+4. **Elegibilidade final:** distância dentro do raio efetivo e capacidade de atendimento.
+
+### Score geográfico explicável
+
+```text
+score_geo = 0,5*score_proximidade + 0,3*score_regiao + 0,2*score_capacidade
+score_proximidade = max(0, 1 - distancia_km / raio_efetivo_km)
+```
+
+### Regras de expansão controlada
+
+- iniciar com raio da intenção;
+- expandir em faixas progressivas (ex.: +5 km, +15 km, +30 km) quando oferta insuficiente;
+- respeitar limite máximo para evitar propostas irrelevantes;
+- manter explicação do motivo de notificação para o vendedor.
+
+## 11. Métricas de estimativa de precificação (média de valores)
+
+### Base de cálculo
+
+- propostas históricas e fechamentos da mesma categoria/subcategoria;
+- segmentação por região, faixa de quantidade, prazo e condição do item;
+- exclusão de registros incompletos e outliers extremos.
+
+### Métricas principais
+
+1. **Média simples local** (`media_local`).
+2. **Média ponderada** por recência, similaridade e reputação do fornecedor.
+3. **Mediana e faixa interquartil** para robustez contra distorções.
+4. **Desvio padrão** para medir volatilidade.
+5. **Índice de confiança** com base em volume e estabilidade amostral.
+
+```text
+media_ponderada = Σ(preco_i * peso_i) / Σ(peso_i)
+peso_i = peso_recencia * peso_similaridade * peso_qualidade
+```
+
+### Saída para produto
+
+- **Comprador:** faixa sugerida (`P25-P75`), média estimada e nível de confiança.
+- **Vendedor:** feedback relativo (abaixo/na/acima da média da demanda comparável).
+- **Motor:** uso do benchmark para priorização e alertas de proposta fora do padrão.
+
+## 12. Lógica C2B (Consumer-to-Business)
+
+No Radar, o fluxo central é C2B: o consumidor inicia a demanda e o mercado responde com oferta qualificada.
+
+### Fluxo operacional
+
+1. **Consumidor declara necessidade** (texto livre + orçamento/prazo/localização aproximada).
+2. **Motor estrutura a intenção** (categoria, atributos, urgência e critérios de match).
+3. **Plataforma seleciona vendedores compatíveis** (área, região, proximidade e capacidade).
+4. **Vendedores enviam propostas estruturadas** (preço, prazo, frete, garantia e condição).
+5. **Consumidor compara e negocia** com privacidade em camadas.
+6. **Escolha e fechamento** com registro de resultado e motivo.
+7. **Avaliações mútuas e realimentação** para melhorar matching e precificação.
+
+### Regras de qualidade C2B
+
+- limite de propostas por intenção para manter qualidade de decisão;
+- bloqueio de proposta incompleta (sem preço, frete ou prazo);
+- privacidade progressiva para reduzir assédio comercial e fraude;
+- feedback agregado para competição por valor, sem expor preço individual de concorrentes.
+
 ## Núcleo operacional
 
 > O comprador publica uma necessidade estruturada; o Radar encontra fornecedores compatíveis;

@@ -1,0 +1,50 @@
+name: Bug report
+description: Reportar defeito com passos de reprodução e impacto
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar. Preencha as informações para acelerar a análise.
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      description: Onde e quando o problema acontece?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      description: Liste os passos em ordem.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Resultado atual
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidade
+      options:
+        - baixa
+        - média
+        - alta
+        - crítica
+    validations:
+      required: true

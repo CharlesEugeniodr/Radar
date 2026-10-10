@@ -1,0 +1,45 @@
+name: Feature request
+description: Solicitar nova funcionalidade ou melhoria
+title: "[FEAT] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Descreva a melhoria de forma objetiva, ligada ao valor de negócio.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema/oportunidade
+      description: Qual dor ou oportunidade essa feature resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+      description: O que precisa existir para resolver o problema?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      description: Como saberemos que a entrega está pronta?
+      placeholder: |
+        - [ ] Critério 1
+        - [ ] Critério 2
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domínio
+      options:
+        - comprador
+        - vendedor
+        - motor-radar
+        - plataforma
+        - infraestrutura
+    validations:
+      required: true

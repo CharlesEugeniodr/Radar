@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentação de arquitetura
+    url: https://github.com/CharlesEugeniodr/Radar/blob/main/docs/ARQUITETURA.md
+    about: Consulte a visão de arquitetura antes de abrir uma issue.
